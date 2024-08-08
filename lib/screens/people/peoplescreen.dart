@@ -177,25 +177,26 @@ class PeopleScreen extends StatelessWidget {
                   ),
                 ),
                 verticalSpace(20),
-                peopleList('Raihan Fikri', 'raihanfikri@gmail.com',
-                    'assets/images/1.jpg'),
-                peopleList('Raihan Fikri', 'raihanfikri@gmail.com',
-                    'assets/images/2.jpg'),
-                peopleList('Raihan Fikri', 'raihanfikri@gmail.com',
-                    'assets/images/3.jpg'),
-                peopleList('Raihan Fikri', 'raihanfikri@gmail.com',
-                    'assets/images/3.jpg'),
-                peopleList('Raihan Fikri', 'raihanfikri@gmail.com',
-                    'assets/images/3.jpg'),
-                peopleList('Raihan Fikri', 'raihanfikri@gmail.com',
-                    'assets/images/3.jpg'),
+                peopleList('SamTec Code', 'samtec@gmail.com',
+                    'assets/images/1.jpg', false),
+                peopleList('SamTec Code', 'samtec@gmail.com',
+                    'assets/images/2.jpg', true),
+                peopleList('SamTec Code', 'samtec@gmail.com',
+                    'assets/images/3.jpg', false),
+                peopleList('SamTec Code', 'samtec@gmail.com',
+                    'assets/images/4.jpg', true),
+                peopleList('SamTec Code', 'samtec@gmail.com',
+                    'assets/images/5.jpg', true),
+                peopleList('SamTec Code', 'samtec@gmail.com',
+                    'assets/images/6.jpg', true),
               ],
             ),
           )),
     );
   }
 
-  peopleList(String name, String email, String imageUrl) {
+  peopleList(String name, String email, String imageUrl, bool isOn) {
+    // isOn = false;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Container(
@@ -213,47 +214,62 @@ class PeopleScreen extends StatelessWidget {
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           SizedBox(
-            child: Row(
+            width: 60,
+            height: 60,
+            child: CircleAvatar(
+              backgroundImage: AssetImage(
+                imageUrl,
+              ),
+            ),
+          ),
+          horizontalSpace(5),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SizedBox(
-                  width: 60,
-                  height: 60,
-                  child: ClipOval(
-                    child: Image(
-                      image: AssetImage(
-                        imageUrl,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      child: AutoSizeText(
+                        name,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            overflow: TextOverflow.ellipsis),
                       ),
-                      fit: BoxFit.cover,
                     ),
+                    horizontalSpace(5),
+                    isOn == true
+                        ? Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.blue[100],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const AutoSizeText(
+                              'On Arto+',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 12,
+                              ),
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                    //  horizontalSpace(5),
+                  ],
+                ),
+                AutoSizeText(
+                  email,
+                  style: TextStyle(
+                    color: Colors.grey[600],
                   ),
                 ),
-                horizontalSpace(5),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AutoSizeText(
-                      name,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    AutoSizeText(
-                      email,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                )
               ],
             ),
           ),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.menu))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz))
         ]),
       ),
     );
