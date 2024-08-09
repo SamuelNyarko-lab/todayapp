@@ -7,7 +7,7 @@ class PeopleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double deviceWidth = MediaQuery.of(context).size.width;
+    //double deviceWidth = MediaQuery.of(context).size.width;
     double deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
@@ -106,7 +106,7 @@ class PeopleScreen extends StatelessWidget {
                 verticalSpace(20),
                 Container(
                   //height: 100,
-                  width: deviceWidth,
+                  width: deviceWidth(context),
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                       color: const Color.fromRGBO(222, 219, 255, 1),
@@ -126,7 +126,7 @@ class PeopleScreen extends StatelessWidget {
                       ),
                       verticalSpace(10),
                       SizedBox(
-                        width: deviceWidth / 1.5,
+                        width: deviceWidth(context) / 1.5,
                         child: RichText(
                           text: const TextSpan(
                               text: 'Earn ',
