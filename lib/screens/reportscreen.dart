@@ -6,6 +6,7 @@ import 'package:todayapp/helpers/helpers.dart';
 class ReportScreen extends StatelessWidget {
   ReportScreen({super.key});
   List<String> months = [
+    "Download All",
     "January",
     "February",
     "March",
@@ -63,6 +64,7 @@ class ReportScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            verticalSpace(10),
             Text.rich(
               TextSpan(
                 style: const TextStyle(color: Colors.black, fontSize: 16),
@@ -169,27 +171,39 @@ class ReportScreen extends StatelessWidget {
             verticalSpace(10),
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) => Container(
                 child: ListTile(
                   leading: Text(
                     months[index],
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
                   contentPadding: EdgeInsets.zero,
-                  trailing: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.file_download_outlined,
-                    ),iconSize: 20,
-                    color: Colors.grey,
-                    style: const ButtonStyle(
-                      backgroundColor:
-                          MaterialStatePropertyAll<Color>(Colors.red),
+                  trailing: Container(
+                    width: 30.0,
+                    height: 30.0,
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(
+                      color: Color.fromRGBO(236, 237, 242, 1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                      onPressed: () {},
+                      padding: EdgeInsetsDirectional.zero,
+                      icon: const Icon(
+                        Icons.file_download_outlined,
+                      ),
+                      iconSize: 25,
+                      color: Colors.black,
                     ),
                   ),
+                  shape: const Border(
+                      bottom: BorderSide(
+                    color: Color.fromRGBO(215, 217, 223, 1),
+                  )),
                 ),
               ),
               itemCount: months.length,
@@ -198,16 +212,145 @@ class ReportScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: MaterialButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) {
+                return Container(
+                    padding: const EdgeInsets.all(10),
+                    height: deviceHeight(context) / 1.2,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const AutoSizeText(
+                                "Custom Reports",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Container(
+                                width: 30.0,
+                                height: 30.0,
+                                alignment: Alignment.center,
+                                decoration: const BoxDecoration(
+                                  color: Color.fromRGBO(236, 237, 242, 1),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  padding: EdgeInsetsDirectional.zero,
+                                  icon: const Icon(
+                                    Icons.close,
+                                  ),
+                                  iconSize: 25,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                          verticalSpace(10),
+                          Container(
+                            padding: const EdgeInsets.only(
+                              right: 15,
+                            ),
+                            // width: deviceWidth(context) / 1.1,
+                            child: const AutoSizeText(
+                              "You can set a date to choose which report you want to download",
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                          verticalSpace(10),
+                          const AutoSizeText(
+                            "Your balance",
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          verticalSpace(10),
+                          const AutoSizeText(
+                            "File format",
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          verticalSpace(10),
+                          const AutoSizeText(
+                            "Start Date",
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          verticalSpace(10),
+                          const AutoSizeText(
+                            "End Date",
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          verticalSpace(10),
+                          const AutoSizeText(
+                            "Statemment Language",
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 60,
+                            width: deviceWidth(context),
+                            child: DropdownButtonFormField(
+                              items: ['Year', 'Year2']
+                                  .map((itemValue) => DropdownMenuItem(
+                                        value: itemValue,
+                                        child: Text(itemValue),
+                                      ))
+                                  .toList(),
+                              onChanged: (value) {
+                                if (kDebugMode) {
+                                  print(value);
+                                }
+                              },
+                              iconDisabledColor: Colors.white,
+                              iconEnabledColor: Colors.white,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(
+                                      10,
+                                    ),
+                                  ),
+                                ),
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 16.0),
+                                suffixIcon: SizedBox.shrink(),
+                              ),
+                            ),
+                          ),
+                          verticalSpace(10),
+                        ],
+                      ),
+                    ));
+              });
+        },
         color: Colors.black,
         height: 50,
-        child: (AutoSizeText(
-          'Custom Report',
-          style: TextStyle(color: Colors.white),
-        )),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
           50,
+        )),
+        child: (const AutoSizeText(
+          'Custom Report',
+          style: TextStyle(color: Colors.white),
         )),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
