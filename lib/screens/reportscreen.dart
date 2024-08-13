@@ -172,39 +172,37 @@ class ReportScreen extends StatelessWidget {
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => Container(
-                child: ListTile(
-                  leading: Text(
-                    months[index],
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+              itemBuilder: (context, index) => ListTile(
+                leading: Text(
+                  months[index],
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
-                  contentPadding: EdgeInsets.zero,
-                  trailing: Container(
-                    width: 30.0,
-                    height: 30.0,
-                    alignment: Alignment.center,
-                    decoration: const BoxDecoration(
-                      color: Color.fromRGBO(236, 237, 242, 1),
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      onPressed: () {},
-                      padding: EdgeInsetsDirectional.zero,
-                      icon: const Icon(
-                        Icons.file_download_outlined,
-                      ),
-                      iconSize: 25,
-                      color: Colors.black,
-                    ),
-                  ),
-                  shape: const Border(
-                      bottom: BorderSide(
-                    color: Color.fromRGBO(215, 217, 223, 1),
-                  )),
                 ),
+                contentPadding: EdgeInsets.zero,
+                trailing: Container(
+                  width: 30.0,
+                  height: 30.0,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(236, 237, 242, 1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    onPressed: () {},
+                    padding: EdgeInsetsDirectional.zero,
+                    icon: const Icon(
+                      Icons.file_download_outlined,
+                    ),
+                    iconSize: 25,
+                    color: Colors.black,
+                  ),
+                ),
+                shape: const Border(
+                    bottom: BorderSide(
+                  color: Color.fromRGBO(215, 217, 223, 1),
+                )),
               ),
               itemCount: months.length,
             )
